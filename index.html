@@ -52,6 +52,8 @@
 					<h2>Hello There</h2>
 					<p>
             <a href="https://www.drupal.org/u/rodrigoaguilera">https://www.drupal.org/u/rodrigoaguilera</a>
+          </p>
+					<p>
             <img src="images/ymbralogo.png" alt="Logo Ymbra" style="border:0">
           </p>
 						<aside class="notes">
@@ -64,8 +66,8 @@
 					<h2>Agenda</h2>
           <ul>
             <li>Behaviour driven development</li>
-            <li>Quickstart your install</li>
             <li>Behat + Drupal</li>
+            <li>Quickstart your install</li>
             <li>Speaking my language</li>
             <li>Awesome tricks</li>
           </ul>
@@ -73,7 +75,7 @@
               Is a extensible framework, it has a history, is going to be used by drupal core.
             </aside>
 				</section>
-        
+
         <section>
           <section>
             <h2>Behaviour driven development</h2>
@@ -91,6 +93,7 @@
           <section>
             <h2>Get closer to the stakeholders</h2>
             <aside class="notes">
+              Clients don't care about scope or budget so better speak bussines language.
             </aside>
           </section>
 
@@ -105,6 +108,52 @@
             <aside class="notes">
             </aside>
           </section>
+        </section>
+
+        <section>
+          <section>
+            <h2>Behat + Drupal</h2>
+            <aside class="notes">
+            </aside>
+          </section>
+
+          <section>
+            <h2>What is behat?</h2>
+            <p> BDD framework released as free software written in PHP.</p>
+            <ul>
+              <li>Uses gherkin as a business readable and domain specific language</li>
+              <li>Mink as a browser controller</li>
+            </ul>
+            <aside class="notes">
+              Gherkin is a kind of cucumber.
+              <br>
+              Some browsers have js or different capabilities.
+              <br>
+
+            </aside>
+          </section>
+
+          <section>
+            <h2>Gherkin syntax</h2>
+            <p style="text-align: left;">
+            <code>
+              <strong>Feature:</strong> Banana Calculator <br>
+              As Bob the Banana merchant, <br>
+              I want a calculator that can add the amount of bananas so that I can know how many bananas I currently have <br>
+              <br>
+
+              <strong>Scenario:</strong> Will add 2 banana amounts <br>
+              <strong>Given </strong>I have 3 Bananas <br>
+              <strong> When </strong>I add 5 Bananas <br>
+              <strong>  Then </strong> I should have 8 Bananas <br>
+
+            </code>
+					</p>
+            <aside class="notes">
+              keywords highlighted. <br>
+              .feature file
+            </aside>
+          </section>
 
           <section>
             <h2>Drawbacks</h2>
@@ -115,6 +164,8 @@
               Even if you get a way to compile the semi natural language to something fast, you are still at a higher level.
             </aside>
           </section>
+        </section>
+
         </section>
 
         <section>
@@ -128,15 +179,70 @@
 
         <section>
           <section>
-            <h2>Behat + Drupal</h2>
+            <h2>Speaking my language</h2>
             <aside class="notes">
             </aside>
           </section>
-        </section>
 
-        <section>
           <section>
             <h2>Speaking my language</h2>
+            <p>
+            <pre><code>
+ use Drupal\DrupalExtension\Context\RawDrupalContext;
+ use Behat\Behat\Context\SnippetAcceptingContext;
+/**
+ * Defines application features from the specific context.
+ */
+class FeatureContext extends RawDrupalContext implements SnippetAcceptingContext {
+  private $bananas
+  /**
+   * @Given /^I have (\d+) bananas$/
+   */
+   public function iHaveBananas($b) {
+     $this->bananas = $b;
+   }
+   ...
+}
+            </code></pre>
+					</p>
+            <aside class="notes">
+            </aside>
+          </section>
+
+          <section>
+            <h2>Speaking my language</h2>
+            <p>
+            <pre><code>
+  /**
+   * @When /^I add (\d+) bananas$/
+   */
+   public function iAddBananas($b) {
+     $this->bananas += $b;
+   }
+            </code></pre>
+					</p>
+            <aside class="notes">
+            </aside>
+          </section>
+
+          <section>
+            <h2>Speaking my language</h2>
+            <p>
+            <pre><code>
+  /**
+   * @Them /^I should have (\d+) bananas$/
+   */
+   public function iShouldHaveBananas($b) {
+     assertEquals($b, $this->bananas);
+   }
+            </code></pre>
+					</p>
+            <aside class="notes">
+            </aside>
+          </section>
+
+          <section>
+            <h2></h2>
             <aside class="notes">
             </aside>
           </section>
