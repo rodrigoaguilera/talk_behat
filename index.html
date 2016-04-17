@@ -57,7 +57,8 @@
             <img src="images/ymbralogo.png" alt="Logo Ymbra" style="border:0">
           </p>
 						<aside class="notes">
-              I'm from Madrid, now I live in Barcelona. I'm 29. I work as a drupal developer at Ymbra, Citilab.
+              Thank you to the organization. <br>
+              I'm from Madrid, now I live in Barcelona. I'm 29. I work as a drupal developer at Ymbra, Citilab. <br>
               I have a curiosity to improve process.
             </aside>
 				</section>
@@ -93,19 +94,24 @@
           <section>
             <h2>Get closer to the stakeholders</h2>
             <aside class="notes">
-              Clients don't care about scope or budget so better speak bussines language.
+              Clients don't care about scope or budget so better speak bussines language. <br>
+              A solution for miscomunication. <br>
+              Get everyone together.
             </aside>
           </section>
 
           <section>
             <h2>Make development more conversational</h2>
             <aside class="notes">
+              Create a common vocabulary between programmers, project managers, product owners, QA... <br>
+              Semantic tests.
             </aside>
           </section>
 
           <section>
             <h2>Make software that matters</h2>
             <aside class="notes">
+              You can check your application continously.
             </aside>
           </section>
         </section>
@@ -113,23 +119,28 @@
         <section>
           <section>
             <h2>Behat + Drupal</h2>
+            <img src="images/behatftw.png" alt="Questions" style="border:0; width: 600px;">
             <aside class="notes">
             </aside>
           </section>
 
           <section>
             <h2>What is behat?</h2>
-            <p> BDD framework released as free software written in PHP.</p>
+            <p> BDD framework written in PHP.</p>
             <ul>
               <li>Uses gherkin as a business readable and domain specific language</li>
               <li>Mink as a browser controller</li>
+              <li>Free software</li>
+              <li>Flexible (not only browsers)</li>
+              <li>Constitutes a challenge</li>
             </ul>
             <aside class="notes">
+              No dependencies because of php. <br>
               Gherkin is a kind of cucumber.
               <br>
               Some browsers have js or different capabilities.
               <br>
-
+              A challenge for the good of the development.
             </aside>
           </section>
 
@@ -138,11 +149,12 @@
             <p style="text-align: left;">
             <code>
               <strong>Feature:</strong> Banana Calculator <br>
+              In order to keep a stock of bananas <br>
               As Bob the Banana merchant, <br>
               I want a calculator that can add the amount of bananas so that I can know how many bananas I currently have <br>
               <br>
 
-              <strong>Scenario:</strong> Will add 2 banana amounts <br>
+              <strong>Scenario:</strong> Add 2 banana amounts <br>
               <strong>Given </strong>I have 3 Bananas <br>
               <strong> When </strong>I add 5 Bananas <br>
               <strong>  Then </strong> I should have 8 Bananas <br>
@@ -150,18 +162,23 @@
             </code>
 					</p>
             <aside class="notes">
+              Structured language to describe features. <br>
               keywords highlighted. <br>
-              .feature file
+              .feature file <br>
+              multilingual. <br>
             </aside>
           </section>
 
           <section>
             <h2>Drawbacks</h2>
             <ul>
-              <li>Slow</li>
+              <li>Slow.</li>
+              <li>Understanding of the domain.</li>
+              <li>Requires effort to make them robust.</li>
             </ul>
             <aside class="notes">
-              Even if you get a way to compile the semi natural language to something fast, you are still at a higher level.
+              Even if you get a way to compile the semi natural language to something fast, you are still at a higher level. <br>
+              If a new button with the same name eg. "Send". your text will break.
             </aside>
           </section>
         </section>
@@ -171,16 +188,79 @@
         <section>
           <section>
             <h2>Quickstart your install</h2>
+            Behat is just a PHP library that can be installed with <strong>composer</strong>
+            <br>
+            <del><pre><code>
+composer require behat/behat</code></pre></del>
+            <pre><code>
+composer require drupal/drupal-extension='~3.1'
+            </code></pre>
             <aside class="notes">
               Little demo with a D8 standard install.
+              <br>
+              I'm not going into composer details.
             </aside>
           </section>
+
+          <section>
+            <h2>Initialize the skeleton</h2>
+            <pre><code>
+vendor/bin/behat --init
+            </code></pre>
+            <aside class="notes">
+              Then we can write some features.
+            </aside>
+          </section>
+
+          <section>
+            <h2>behat.yml</h2>
+            <pre><code>
+default:
+  suites:
+    default:
+      contexts:
+        - Drupal\DrupalExtension\Context\DrupalContext
+  extensions:
+    Behat\MinkExtension:
+      goutte: ~
+      base_url: http://example.org/  # Replace with your site's URL
+    Drupal\DrupalExtension:
+      blackbox: ~
+            </code></pre>
+            <aside class="notes">
+              Later you will add css selectors as regions to this file.
+            </aside>
+          </section>
+
+          <section>
+            <h2>Steps available</h2>
+            <pre><code>
+vendor/bin/behat -di
+            </code></pre>
+            <ul>
+              <li>Given I am logged in as a user with the :role role</li>
+              <li>Given I am viewing a/an :type (content )with the title :title </li>
+              <li>Then I should see the error message( containing) :message</li>
+            </ul>
+            <aside class="notes">
+              Then we can write some features.
+            </aside>
+          </section>
+
         </section>
 
         <section>
           <section>
             <h2>Speaking my language</h2>
             <aside class="notes">
+            </aside>
+          </section>
+
+          <section>
+            <h2>Behat and gherkin</h2>
+            <p> Translates each step in a PHP callback </p>
+            <aside class="notes">
+              When I run the banana example I get the code that I should write in the FeatureContext.php
             </aside>
           </section>
 
@@ -242,45 +322,156 @@ class FeatureContext extends RawDrupalContext implements SnippetAcceptingContext
           </section>
 
           <section>
-            <h2></h2>
+            <h2>Command a browser - Mink</h2>
+            Fill out forms, click on buttons, check the output.
             <aside class="notes">
             </aside>
           </section>
+
+          <section>
+            <h2>Command a browser</h2>
+            <pre><code>
+            $session = $this->getSession();
+            $session->visit('http://drupal.org');
+            $session->getStatusCode();
+            $session->getCurrentUrl();
+
+            $page = $session->getPage();
+            $e = $page->find('css', li:nth-child(4) a);
+            $e->getText();
+            $e->getAttribute('href');
+            $e->click();
+
+            </code></pre>
+            <aside class="notes">
+            </aside>
+          </section>
+
         </section>
 
         <section>
           <section>
             <h2>Awesome tricks</h2>
+            <ul>
+              <li>Test in any browser.</li>
+              <li>Debug tests</li>
+              <li>Nice reports</li>
+            </ul>
             <aside class="notes">
+            </aside>
+          </section>
+
+          <section>
+            <h2>Test with js enabled</h2>
+            <ul>
+              <li>Goutte driver is only doing curl request</li>
+              <li>Control when js is needed using @javascript tags in your scenarios</li>
+              <li>Cookies and headers</li>
+              <li>Manipulate the page</li>
+              <li>Selenium, phantomjs</li>
+            </ul>
+            <aside class="notes">
+              Autocomplete
+            </aside>
+          </section>
+
+          <section>
+            <h2>Test in any browser</h2>
+            <ul>
+              <li>Different js implementations</li>
+              <li>Screenshots</li>
+            </ul>
+            <aside class="notes">
+              selenium web driver
+            </aside>
+          </section>
+
+          <section>
+            <h2>Anything is possible</h2>
+            <pre><code>
+ /**
+   * @Given /^I switch to the first iframe$/
+   */
+  public function iSwitchToTheFirstIframe() {
+    $javascript = &lt;&lt;&lt;JS
+(function(){
+var iframes = document.getElementsByTagName('iframe');
+var f = iframes[0];
+f.id = "no_name_iframe";
+})()
+JS;
+    $this->getSession()->executeScript($javascript);
+    $this->getSession()->switchToIFrame('no_name_iframe');
+  }
+            </code></pre>
+            <aside class="notes">
+            </aside>
+          </section>
+
+          <section>
+            <h2>Debugging: Then I break.</h2>
+            <p>
+            <img src="images/break.gif" alt="Samuel" style="border:0; width: 600px;">
+            </p>
+            <aside class="notes">
+              Stops the test.
+            </aside>
+          </section>
+
+          <section>
+            <h2>Debugging - screenshot</h2>
+            <img src="images/screenshot.jpg" alt="Take a screenshot" style="border:0; width: 600px;">
+            <aside class="notes">
+            </aside>
+          </section>
+
+          <section>
+            <h2>HTML reports</h2>
+            <img src="images/htmlreport.png" alt="HTML report" style="border:0; width: 600px;">
+            <br>
+            <a href="https://github.com/dutchiexl/BehatHtmlFormatterPlugin">https://github.com/dutchiexl/BehatHtmlFormatterPlugin</a>
+            <aside class="notes">
+              You can get the stakeholders involved. <br>
+              Maybe the product owner knows what changed.
+            </aside>
+          </section>
+
+        </section>
+
+        <section>
+          <section>
+            <h2>Behat and drupal core.</h2>
+            [Meta] Use Behat for validation testing <a href="https://www.drupal.org/node/2232271">https://www.drupal.org/node/2232271</a>
+            <br>
+            JS testing have been commited recently.
+            <aside class="notes">
+              A different phantomjs driver has been included.
+              <br>
             </aside>
           </section>
         </section>
 
         <section>
           <section>
-            <h2></h2>
+            <h2>It's so easy!</h2>
+            <p>Very good documentation.</p>
             <aside class="notes">
-            </aside>
-          </section>
-        </section>
-
-        <section>
-          <section>
-            <h2></h2>
-            <aside class="notes">
+              One download and one command. <br>
+              Don't go full BDD. <br>
+              The most important pages. <br>
+              Use only the steps available.
             </aside>
           </section>
         </section>
 
 				<section>
-					<h2>Interesting references</h2>
-					<ul>
-						<li><a href="https://www.drupal.org/node/2232271">Introduce behat in drupal core</a></li>
-						<li><a href="#">Introdution to behat by Merce (coworker at Ymbra)</a></li>
-						<li><a href="http://metadrop.net/dev/behat-3x-y-drupal-cambios-respecto-behat-2x">Migrate from behat 2 to 3 by sanzante@metadrop</a></li>
-						<li><a href="https://github.com/jhedstrom/drupalextension">Behat Drupal Extension</a></li>
-					</ul>
-				</section>
+          <h2>Interesting references</h2>
+          <ul>
+            <li><a href="#">Introdution to behat by Merce (coworker at Ymbra)</a></li>
+            <li><a href="http://metadrop.net/dev/behat-3x-y-drupal-cambios-respecto-behat-2x">Migrate from behat 2 to 3 by sanzante@metadrop</a></li>
+            <li><a href="https://github.com/jhedstrom/drupalextension">Behat Drupal Extension</a></li>
+          </ul>
+        </section>
 
         <section>
           <h2>Questions</h2>
