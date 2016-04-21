@@ -46,6 +46,10 @@
 					<p>
 						<small>A talk by <a href="http://www.rodrigoaguilera.net">Rodrigo Aguilera</a> / <a href="http://twitter.com/marinero">@marinero</a></small>
 					</p>
+						<aside class="notes">
+              Thank you to the organization. <br>
+              I'm excited about behat.
+            </aside>
 				</section>
 
 				<section>
@@ -57,9 +61,9 @@
             <img src="images/ymbralogo.png" alt="Logo Ymbra" style="border:0">
           </p>
 						<aside class="notes">
-              Thank you to the organization. <br>
               I'm from Madrid, now I live in Barcelona. I'm 29. I work as a drupal developer at Ymbra, Citilab. <br>
-              I have a curiosity to improve process.
+              I have a curiosity to improve process. <br>
+              Previously on: servers, multilingual, community tools, code review development quality... 
             </aside>
 				</section>
 
@@ -73,26 +77,36 @@
             <li>Awesome tricks</li>
           </ul>
 						<aside class="notes">
-              Is a extensible framework, it has a history, is going to be used by drupal core.
+              I want you to get out of here with a broad idea of what can be achieved and how easy it is. <br>
+              Is a extensible framework <br>
+              Is relevant because there is plans to be integrated into D8. <br>
             </aside>
 				</section>
 
         <section>
           <section>
             <h2>Behaviour driven development</h2>
+            <p>
+            Aka BDD
+            </p>
             <aside class="notes">
-              Aka BDD
+              It's a bit philosophical. <br>
+              Around the concept of behaviour. <br>
             </aside>
           </section>
 
           <section>
             <h2>What is BDD?</h2>
+            <img src="images/comic.jpg" alt="Questions" style="border:0; width: 600px;">
             <aside class="notes">
+              It's about expectations on the different parts of people involved. <br>
+              Beta testers are important. Altough we don't have them.
             </aside>
           </section>
 
           <section>
             <h2>Get closer to the stakeholders</h2>
+            <p> We all use different languages. </p>
             <aside class="notes">
               Clients don't care about scope or budget so better speak bussines language. <br>
               A solution for miscomunication. <br>
@@ -110,8 +124,20 @@
 
           <section>
             <h2>Make software that matters</h2>
+            <p>It's not just a cool thing to have it really adds bussines value.</p>
             <aside class="notes">
               You can check your application continously.
+            </aside>
+          </section>
+
+          <section>
+            <h2>Evolution</h2>
+            <ul>
+              <li>Unit tests: autotest your code.</li>
+              <li>TDD: Test goes first.</li>
+              <li>BDD: Design goes first.</li>
+            </ul>
+            <aside class="notes">
             </aside>
           </section>
         </section>
@@ -183,8 +209,6 @@
           </section>
         </section>
 
-        </section>
-
         <section>
           <section>
             <h2>Quickstart your install</h2>
@@ -241,9 +265,24 @@ vendor/bin/behat -di
               <li>Given I am logged in as a user with the :role role</li>
               <li>Given I am viewing a/an :type (content )with the title :title </li>
               <li>Then I should see the error message( containing) :message</li>
+              <li>Then drush output should contain :output</li>
             </ul>
             <aside class="notes">
-              Then we can write some features.
+              Then we can write some features. <br>
+              Just using natural phrases. <br>
+              There some steps that allow you to use css class. BAD <br>
+
+            </aside>
+          </section>
+
+          <section>
+            <h2>Execute the tests</h2>
+            <pre><code>
+vendor/bin/behat
+            </code></pre>
+            <aside class="notes">
+              Simple! <br>
+              You can introduce in your task runner and receive a nice report.
             </aside>
           </section>
 
@@ -253,6 +292,7 @@ vendor/bin/behat -di
           <section>
             <h2>Speaking my language</h2>
             <aside class="notes">
+              I want you to get out of here with a broad idea of what can be achieved and how easy it is.
             </aside>
           </section>
 
@@ -266,7 +306,6 @@ vendor/bin/behat -di
 
           <section>
             <h2>Speaking my language</h2>
-            <p>
             <pre><code>
  use Drupal\DrupalExtension\Context\RawDrupalContext;
  use Behat\Behat\Context\SnippetAcceptingContext;
@@ -284,14 +323,14 @@ class FeatureContext extends RawDrupalContext implements SnippetAcceptingContext
    ...
 }
             </code></pre>
-					</p>
-            <aside class="notes">
+           <aside class="notes">
+             Regular expresions. <br>
+             Don't create phrases that are not meaningful to the user role. <br>
             </aside>
           </section>
 
           <section>
             <h2>Speaking my language</h2>
-            <p>
             <pre><code>
   /**
    * @When /^I add (\d+) bananas$/
@@ -300,23 +339,20 @@ class FeatureContext extends RawDrupalContext implements SnippetAcceptingContext
      $this->bananas += $b;
    }
             </code></pre>
-					</p>
             <aside class="notes">
             </aside>
           </section>
 
           <section>
             <h2>Speaking my language</h2>
-            <p>
             <pre><code>
   /**
-   * @Them /^I should have (\d+) bananas$/
+   * @Then /^I should have (\d+) bananas$/
    */
    public function iShouldHaveBananas($b) {
      assertEquals($b, $this->bananas);
    }
             </code></pre>
-					</p>
             <aside class="notes">
             </aside>
           </section>
@@ -325,6 +361,8 @@ class FeatureContext extends RawDrupalContext implements SnippetAcceptingContext
             <h2>Command a browser - Mink</h2>
             Fill out forms, click on buttons, check the output.
             <aside class="notes">
+              Is just a controller. <br>
+              we have to add a driver. <br>
             </aside>
           </section>
 
@@ -344,6 +382,9 @@ class FeatureContext extends RawDrupalContext implements SnippetAcceptingContext
 
             </code></pre>
             <aside class="notes">
+              Session: just a tab. <br>
+              Page: the DOM. <br>
+              e: element <br>
             </aside>
           </section>
 
@@ -358,6 +399,9 @@ class FeatureContext extends RawDrupalContext implements SnippetAcceptingContext
               <li>Nice reports</li>
             </ul>
             <aside class="notes">
+              We have the basics: <br>
+              A lot of steps meaningful for drupal <br>
+              The posibility of writting new steps. <br>
             </aside>
           </section>
 
@@ -382,7 +426,10 @@ class FeatureContext extends RawDrupalContext implements SnippetAcceptingContext
               <li>Screenshots</li>
             </ul>
             <aside class="notes">
-              selenium web driver
+              selenium web driver <br>
+              headless <br>
+              visual regressions. <br>
+              The definitions change: for example I cannot fill invisible form items. <br>
             </aside>
           </section>
 
@@ -405,6 +452,7 @@ JS;
   }
             </code></pre>
             <aside class="notes">
+              Not only command the browser, execute js.
             </aside>
           </section>
 
@@ -459,7 +507,7 @@ JS;
               One download and one command. <br>
               Don't go full BDD. <br>
               The most important pages. <br>
-              Use only the steps available.
+              Use only the steps available. <br>
             </aside>
           </section>
         </section>
@@ -467,9 +515,11 @@ JS;
 				<section>
           <h2>Interesting references</h2>
           <ul>
-            <li><a href="#">Introdution to behat by Merce (coworker at Ymbra)</a></li>
+            <li><a href="http://ymbra.com/blog/how-get-started-behat">Introdution to behat by Merce (coworker at Ymbra)</a></li>
             <li><a href="http://metadrop.net/dev/behat-3x-y-drupal-cambios-respecto-behat-2x">Migrate from behat 2 to 3 by sanzante@metadrop</a></li>
             <li><a href="https://github.com/jhedstrom/drupalextension">Behat Drupal Extension</a></li>
+            <li><a href="http://rodrigoaguilera.github.io/talk_behat"> Slides: http://rodrigoaguilera.github.io/talk_behat</a></li>
+            <li><a href="https://www.youtube.com/watch?v=0F7-Rr4s9is">Behat intro from a symfony dev</a></li>
           </ul>
         </section>
 
